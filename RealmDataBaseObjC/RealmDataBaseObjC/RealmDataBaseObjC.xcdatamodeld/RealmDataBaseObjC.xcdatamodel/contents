@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Automatic">
+    <entity name="CDAgency" representedClassName="CDAgency" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fromCountry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCountry" inverseName="allAgencies" inverseEntity="CDCountry" syncable="YES"/>
+    </entity>
+    <entity name="CDBorrower" representedClassName="CDBorrower" syncable="YES">
+        <attribute name="bName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="borrowedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProject" inverseName="borrower" inverseEntity="CDProject" syncable="YES"/>
+        <relationship name="fromCountry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCountry" inverseName="allBorrowers" inverseEntity="CDCountry" syncable="YES"/>
+    </entity>
+    <entity name="CDCountry" representedClassName="CDCountry" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="allAgencies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAgency" inverseName="fromCountry" inverseEntity="CDAgency" syncable="YES"/>
+        <relationship name="allBorrowers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBorrower" inverseName="fromCountry" inverseEntity="CDBorrower" syncable="YES"/>
+        <relationship name="allProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProject" inverseName="hostCountry" inverseEntity="CDProject" syncable="YES"/>
+    </entity>
+    <entity name="CDDocType" representedClassName="CDDocType" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CDFinanceType" representedClassName="CDFinanceType" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CDLendingDetails" representedClassName="CDLendingDetails" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CDPrimeDistribution" representedClassName="CDPrimeDistribution" syncable="YES">
+        <attribute name="percentile" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="forSector" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSectors" syncable="YES"/>
+    </entity>
+    <entity name="CDProdLine" representedClassName="CDProdLine" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lineType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CDProject" representedClassName="CDProject" syncable="YES">
+        <attribute name="boardApprovalDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="boardApprovedMonth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="closingDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comAmmount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docAmmount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grantAmmount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="information" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lendingCost" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalAmount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urlPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="agency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDAgency" syncable="YES"/>
+        <relationship name="allDocs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProjectDocs" inverseName="forProject" inverseEntity="CDProjectDocs" syncable="YES"/>
+        <relationship name="allThemes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDTheme" inverseName="allProjects" inverseEntity="CDTheme" syncable="YES"/>
+        <relationship name="borrower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBorrower" inverseName="borrowedProjects" inverseEntity="CDBorrower" syncable="YES"/>
+        <relationship name="displayStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStatus" syncable="YES"/>
+        <relationship name="financetype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDFinanceType" syncable="YES"/>
+        <relationship name="hostCountry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDCountry" inverseName="allProjects" inverseEntity="CDCountry" syncable="YES"/>
+        <relationship name="primaryDistribuion" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPrimeDistribution" syncable="YES"/>
+        <relationship name="projectStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStatus" syncable="YES"/>
+        <relationship name="prouctLineDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProdLine" syncable="YES"/>
+        <relationship name="secondaryDistribution" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSecondaryDistribution" syncable="YES"/>
+    </entity>
+    <entity name="CDProjectDocs" representedClassName="CDProjectDocs" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urlPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="forProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProject" inverseName="allDocs" inverseEntity="CDProject" syncable="YES"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDocType" syncable="YES"/>
+    </entity>
+    <entity name="CDSecondaryDistribution" representedClassName="CDSecondaryDistribution" syncable="YES">
+        <attribute name="percentile" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="forSubSector" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSubSecotr" syncable="YES"/>
+    </entity>
+    <entity name="CDSectors" representedClassName="CDSectors" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="secondarySectors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSubSecotr" inverseName="primarySector" inverseEntity="CDSubSecotr" syncable="YES"/>
+    </entity>
+    <entity name="CDStatus" representedClassName="CDStatus" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CDSubSecotr" representedClassName="CDSubSecotr" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="primarySector" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSectors" inverseName="secondarySectors" inverseEntity="CDSectors" syncable="YES"/>
+    </entity>
+    <entity name="CDTheme" representedClassName="CDTheme" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="allProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProject" inverseName="allThemes" inverseEntity="CDProject" syncable="YES"/>
+    </entity>
+    <entity name="World_Bank" representedClassName="World_Bank" syncable="YES">
+        <attribute name="borrower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryshortname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project_abstract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="project_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CDAgency" positionX="-14627" positionY="-4876" width="128" height="88"/>
+        <element name="CDBorrower" positionX="-14823" positionY="-4828" width="128" height="103"/>
+        <element name="CDCountry" positionX="-14625" positionY="-5031" width="128" height="133"/>
+        <element name="CDDocType" positionX="-14231" positionY="-4492" width="128" height="73"/>
+        <element name="CDFinanceType" positionX="-14067" positionY="-5031" width="128" height="73"/>
+        <element name="CDLendingDetails" positionX="-14096" positionY="-4806" width="128" height="73"/>
+        <element name="CDPrimeDistribution" positionX="-14654" positionY="-4681" width="128" height="73"/>
+        <element name="CDProdLine" positionX="-14211" positionY="-5040" width="128" height="88"/>
+        <element name="CDProject" positionX="-14418" positionY="-4905" width="128" height="403"/>
+        <element name="CDProjectDocs" positionX="-14231" positionY="-4699" width="128" height="118"/>
+        <element name="CDSecondaryDistribution" positionX="-14429" positionY="-4456" width="128" height="73"/>
+        <element name="CDSectors" positionX="-14841" positionY="-4644" width="128" height="88"/>
+        <element name="CDStatus" positionX="-14103" positionY="-4905" width="128" height="73"/>
+        <element name="CDSubSecotr" positionX="-14618" positionY="-4572" width="128" height="88"/>
+        <element name="CDTheme" positionX="-14364" positionY="-5040" width="128" height="88"/>
+        <element name="World_Bank" positionX="-13770" positionY="-4896" width="128" height="133"/>
+    </elements>
+</model>
